@@ -3,24 +3,71 @@
 namespace LynX39\LaraPdfMerger;
 
 use Exception;
+use File;
+use Illuminate\Support\Str;
 use TCPDI;
 
-require_once('tcpdf/tcpdf.php');
-require_once('tcpdf/tcpdi.php');
+require_once 'tcpdf/tcpdf.php';
+require_once 'tcpdf/tcpdi.php';
 
 class PdfManage
 {
-    private $_files;    //['form.pdf']  ["1,2,4, 5-19"]
+    private $_files;
     private $_fpdi;
+    protected $fileName = 'undefined.pdf';
 
-    public function init(){
+    public function __construct()
+    {
+        $this->init();
+    }
+
+    /**
+     * The class deconstructor method
+     */
+    public function __destruct()
+    {
+        $filePath = storage_path('app/tmp');
+        File::cleanDirectory($filePath);
+    }
+
+    public function init()
+    {
         $this->_files = null;
-
         $this->_fpdi = new TCPDI;
         $this->_fpdi->setPrintHeader(false);
         $this->_fpdi->setPrintFooter(false);
 
+        $filePath = storage_path('app/tmp');
+        if (!file_exists($filePath)) {
+            File::makeDirectory($filePath, 0755, true);
+        }
+
         return $this;
+    }
+
+    /**
+     * Get the merged PDF content
+     *
+     * @return string
+     */
+    public function output()
+    {
+        return $this->_fpdi->Output($this->fileName, 'S');
+    }
+
+    /**
+     * Set the final filename
+     * @param string $string
+     * @param mixed $pages
+     * @param mixed $orientation
+     *
+     * @return string
+     */
+    public function addString($string, $pages = 'all', $orientation = null)
+    {
+        $filePath = storage_path('app/tmp/' . Str::random(16) . '.pdf');
+        File::put($filePath, $string);
+        return $this->addPDF($filePath, $pages, $orientation);
     }
 
     /**
@@ -53,7 +100,7 @@ class PdfManage
      * @throws Exception
      * @array $meta [title => $title, author => $author, subject => $subject, keywords => $keywords, creator => $creator]
      */
-    private function doMerge($orientation = null, $meta = [], $duplex=false)
+    private function doMerge($orientation = null, $meta = [], $duplex = false)
     {
         if (!isset($this->_files) || !is_array($this->_files)) {
             throw new Exception("No PDFs to merge.");
@@ -78,7 +125,9 @@ class PdfManage
                     $template = $this->_fpdi->importPage($i);
                     $size = $this->_fpdi->getTemplateSize($template);
 
-                    if ($orientation == null) $fileorientation = $size['w'] < $size['h'] ? 'P' : 'L';
+                    if ($orientation == null) {
+                        $fileorientation = $size['w'] < $size['h'] ? 'P' : 'L';
+                    }
 
                     $this->_fpdi->AddPage($fileorientation, array($size['w'], $size['h']));
                     $this->_fpdi->useTemplate($template);
@@ -90,7 +139,9 @@ class PdfManage
                     }
                     $size = $this->_fpdi->getTemplateSize($template);
 
-                    if ($orientation == null) $fileorientation = $size['w'] < $size['h'] ? 'P' : 'L';
+                    if ($orientation == null) {
+                        $fileorientation = $size['w'] < $size['h'] ? 'P' : 'L';
+                    }
 
                     $this->_fpdi->AddPage($fileorientation, array($size['w'], $size['h']));
                     $this->_fpdi->useTemplate($template);
@@ -111,7 +162,8 @@ class PdfManage
      *
      * @throws \Exception if there are no PDFs to merge
      */
-    public function merge($orientation = null, $meta = []) {
+    public function merge($orientation = null, $meta = [])
+    {
         $this->doMerge($orientation, $meta, false);
     }
 
@@ -123,7 +175,8 @@ class PdfManage
      *
      * @throws \Exception if there are no PDFs to merge
      */
-    public function duplexMerge($orientation = null, $meta = []) {
+    public function duplexMerge($orientation = null, $meta = [])
+    {
         $this->doMerge($orientation, $meta, true);
     }
 
@@ -142,7 +195,6 @@ class PdfManage
             }
         }
 
-
     }
 
     /**
@@ -152,8 +204,7 @@ class PdfManage
      */
     private function _switchmode($mode)
     {
-        switch(strtolower($mode))
-        {
+        switch (strtolower($mode)) {
             case 'download':
                 return 'D';
                 break;
@@ -221,6 +272,6 @@ class PdfManage
                 $this->_fpdi->$metodName($arg);
             }
         }
-    } 
+    }
 
 }
