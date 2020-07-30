@@ -249,7 +249,7 @@ class TCPDF_IMAGES {
 			return false;
 		}
 		//Check signature
-		if (fread($f, 8) != chr(137).'PNG'.chr(13).chr(10).chr(26).chr(10)) {
+		if (fread($f, 8) != chr((int) 137).'PNG'.chr((int) 13).chr((int) 10).chr((int) 26).chr((int) 10)) {
 			// Not a PNG file
 			return false;
 		}

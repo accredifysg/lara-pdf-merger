@@ -210,7 +210,7 @@ class TCPDF_FILTERS {
 			self::Error('decodeFilterASCII85Decode: invalid code');
 		}
 		// z sequence
-		$zseq = chr(0).chr(0).chr(0).chr(0);
+		$zseq = chr((int) 0).chr((int) 0).chr((int) 0).chr((int) 0);
 		// position inside a group of 4 bytes (0-3)
 		$group_pos = 0;
 		$tuple = 0;
@@ -230,7 +230,7 @@ class TCPDF_FILTERS {
 				// the value represented by a group of 5 characters should never be greater than 2^32 - 1
 				$tuple += (($char - 33) * $pow85[$group_pos]);
 				if ($group_pos == 4) {
-					$decoded .= chr($tuple >> 24).chr($tuple >> 16).chr($tuple >> 8).chr($tuple);
+					$decoded .= chr((int) $tuple >> 24).chr((int) $tuple >> 16).chr((int) $tuple >> 8).chr((int) $tuple);
 					$tuple = 0;
 					$group_pos = 0;
 				} else {
@@ -244,15 +244,15 @@ class TCPDF_FILTERS {
 		// last tuple (if any)
 		switch ($group_pos) {
 			case 4: {
-				$decoded .= chr($tuple >> 24).chr($tuple >> 16).chr($tuple >> 8);
+				$decoded .= chr((int) $tuple >> 24).chr((int) $tuple >> 16).chr((int) $tuple >> 8);
 				break;
 			}
 			case 3: {
-				$decoded .= chr($tuple >> 24).chr($tuple >> 16);
+				$decoded .= chr((int) $tuple >> 24).chr((int) $tuple >> 16);
 				break;
 			}
 			case 2: {
-				$decoded .= chr($tuple >> 24);
+				$decoded .= chr((int) $tuple >> 24);
 				break;
 			}
 			case 1: {
@@ -290,7 +290,7 @@ class TCPDF_FILTERS {
 		// initialize the dictionary (with the first 256 entries).
 		$dictionary = array();
 		for ($i = 0; $i < 256; ++$i) {
-			$dictionary[$i] = chr($i);
+			$dictionary[$i] = chr((int) $i);
 		}
 		// previous val
 		$prev_index = 0;
@@ -309,7 +309,7 @@ class TCPDF_FILTERS {
 				// reset the dictionary (with the first 256 entries).
 				$dictionary = array();
 				for ($i = 0; $i < 256; ++$i) {
-					$dictionary[$i] = chr($i);
+					$dictionary[$i] = chr((int) $i);
 				}
 			} elseif ($prev_index == 256) {
 				// first entry

@@ -182,7 +182,7 @@ class TCPDF_STATIC {
 	 * <li>HTML Entity (named): "&amp;shy;"</li>
 	 * <li>How to type in Microsoft Windows: [Alt +00AD] or [Alt 0173]</li>
 	 * <li>UTF-8 (hex): 0xC2 0xAD (c2ad)</li>
-	 * <li>UTF-8 character: chr(194).chr(173)</li>
+	 * <li>UTF-8 character: chr((int) 194).chr((int) 173)</li>
 	 * </ul>
 	 * @param $txt (string) input string
 	 * @param $unicode (boolean) True if we are in unicode mode, false otherwise.
@@ -303,8 +303,8 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function _escape($s) {
-		// the chr(13) substitution fixes the Bugs item #1421290.
-		return strtr($s, array(')' => '\\)', '(' => '\\(', '\\' => '\\\\', chr(13) => '\r'));
+		// the chr((int) 13) substitution fixes the Bugs item #1421290.
+		return strtr($s, array(')' => '\\)', '(' => '\\(', '\\' => '\\\\', chr((int) 13) => '\r'));
 	}
 
 	/**
@@ -444,7 +444,7 @@ class TCPDF_STATIC {
 	public static function _AES($key, $text) {
 		// padding (RFC 2898, PKCS #5: Password-Based Cryptography Specification Version 2.0)
 		$padding = 16 - (strlen($text) % 16);
-		$text .= str_repeat(chr($padding), $padding);
+		$text .= str_repeat(chr((int) $padding), $padding);
 		if (extension_loaded('openssl')) {
 			$iv = openssl_random_pseudo_bytes (openssl_cipher_iv_length('aes-256-cbc'));
 			$text = openssl_encrypt($text, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
@@ -520,7 +520,7 @@ class TCPDF_STATIC {
 			$rc4[$a] = $rc4[$b];
 			$rc4[$b] = $t;
 			$k = $rc4[($rc4[$a] + $rc4[$b]) % 256];
-			$out .= chr(ord($text[$i]) ^ $k);
+			$out .= chr((int) ord($text[$i]) ^ $k);
 		}
 		return $out;
 	}
@@ -579,7 +579,7 @@ class TCPDF_STATIC {
 			++$bslength;
 		}
 		for ($i = 0; $i < $bslength; $i += 2) {
-			$string .= chr(hexdec($bs[$i].$bs[($i + 1)]));
+			$string .= chr((int) hexdec($bs[$i].$bs[($i + 1)]));
 		}
 		return $string;
 	}
@@ -611,10 +611,10 @@ class TCPDF_STATIC {
 	 */
 	public static function getEncPermissionsString($protection) {
 		$binprot = sprintf('%032b', $protection);
-		$str = chr(bindec(substr($binprot, 24, 8)));
-		$str .= chr(bindec(substr($binprot, 16, 8)));
-		$str .= chr(bindec(substr($binprot, 8, 8)));
-		$str .= chr(bindec(substr($binprot, 0, 8)));
+		$str = chr((int) bindec(substr($binprot, 24, 8)));
+		$str .= chr((int) bindec(substr($binprot, 16, 8)));
+		$str .= chr((int) bindec(substr($binprot, 8, 8)));
+		$str .= chr((int) bindec(substr($binprot, 0, 8)));
 		return $str;
 	}
 

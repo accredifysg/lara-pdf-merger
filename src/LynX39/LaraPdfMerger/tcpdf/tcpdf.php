@@ -5062,7 +5062,7 @@ class TCPDF {
 	 */
 	protected function getCellCode($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M') {
 		// replace 'NO-BREAK SPACE' (U+00A0) character with a simple space
-		$txt = str_replace(TCPDF_FONTS::unichr(160, $this->isunicode), ' ', $txt);
+		$txt = str_replace(TCPDF_FONTS::unichr((int) 160, $this->isunicode), ' ', $txt);
 		$prev_cell_margin = $this->cell_margin;
 		$prev_cell_padding = $this->cell_padding;
 		$txt = TCPDF_STATIC::removeSHY($txt, $this->isunicode);
@@ -5366,7 +5366,7 @@ class TCPDF {
 			// rendering mode
 			$s .= sprintf('BT %d Tr %F w ET ', $this->textrendermode, ($this->textstrokewidth * $this->k));
 			// count number of spaces
-			$ns = substr_count($txt, chr(32));
+			$ns = substr_count($txt, chr((int) 32));
 			// Justification
 			$spacewidth = 0;
 			if (($align == 'J') AND ($ns > 0)) {
@@ -5380,7 +5380,7 @@ class TCPDF {
 						$spacewidth /= ($this->font_stretching / 100);
 					}
 					// set word position to be used with TJ operator
-					$txt2 = str_replace(chr(0).chr(32), ') '.sprintf('%F', $spacewidth).' (', $txt2);
+					$txt2 = str_replace(chr((int) 0).chr((int) 32), ') '.sprintf('%F', $spacewidth).' (', $txt2);
 					$unicode_justification = true;
 				} else {
 					// get string width
@@ -6155,11 +6155,11 @@ class TCPDF {
 			$charWidth = $charsWidth[$i];
 			if (($c != 160)
 					AND (($c == 173)
-						OR preg_match($this->re_spaces, TCPDF_FONTS::unichr($c, $this->isunicode))
+						OR preg_match($this->re_spaces, TCPDF_FONTS::unichr((int) $c, $this->isunicode))
 						OR (($c == 45)
 							AND ($i > 0) AND ($i < ($length - 1))
-							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr($chars[($i - 1)], $this->isunicode))
-							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr($chars[($i + 1)], $this->isunicode))
+							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr((int) $chars[($i - 1)], $this->isunicode))
+							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr((int) $chars[($i + 1)], $this->isunicode))
 						)
 					)
 				) {
@@ -6308,7 +6308,7 @@ class TCPDF {
 		$nb = count($chars);
 		// replacement for SHY character (minus symbol)
 		$shy_replacement = 45;
-		$shy_replacement_char = TCPDF_FONTS::unichr($shy_replacement, $this->isunicode);
+		$shy_replacement_char = TCPDF_FONTS::unichr((int) $shy_replacement, $this->isunicode);
 		// widht for SHY replacement
 		$shy_replacement_width = $this->GetCharWidth($shy_replacement);
 		// page width
@@ -6420,11 +6420,11 @@ class TCPDF {
 				// \p{Lo} is needed because Chinese characters are packed next to each other without spaces in between.
 				if (($c != 160)
 					AND (($c == 173)
-						OR preg_match($this->re_spaces, TCPDF_FONTS::unichr($c, $this->isunicode))
+						OR preg_match($this->re_spaces, TCPDF_FONTS::unichr((int) $c, $this->isunicode))
 						OR (($c == 45)
 							AND ($i < ($nb - 1))
-							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr($pc, $this->isunicode))
-							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr($chars[($i + 1)], $this->isunicode))
+							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr((int) $pc, $this->isunicode))
+							AND @preg_match('/[\p{L}]/'.$this->re_space['m'], TCPDF_FONTS::unichr((int) $chars[($i + 1)], $this->isunicode))
 						)
 					)
 				) {
@@ -9507,7 +9507,7 @@ class TCPDF {
 		$prev_encrypted = $this->encrypted;
 		$this->encrypted = false;
 		// set XMP data
-		$xmp = '<?xpacket begin="'.TCPDF_FONTS::unichr(0xfeff, $this->isunicode).'" id="W5M0MpCehiHzreSzNTczkc9d"?>'."\n";
+		$xmp = '<?xpacket begin="'.TCPDF_FONTS::unichr((int) 0xfeff, $this->isunicode).'" id="W5M0MpCehiHzreSzNTczkc9d"?>'."\n";
 		$xmp .= '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c043 52.372728, 2009/01/18-15:08:04">'."\n";
 		$xmp .= "\t".'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'."\n";
 		$xmp .= "\t\t".'<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n";
@@ -9898,7 +9898,7 @@ class TCPDF {
 	 */
 	protected function _putheader() {
 		$this->_out('%PDF-'.$this->PDFVersion);
-		$this->_out('%'.chr(0xe2).chr(0xe3).chr(0xcf).chr(0xd3));
+		$this->_out('%'.chr((int) 0xe2).chr((int) 0xe3).chr((int) 0xcf).chr((int) 0xd3));
 	}
 
 	/**
@@ -10607,7 +10607,7 @@ class TCPDF {
 			for ($i = 1; $i <= 19; ++$i) {
 				$ek = '';
 				for ($j = 0; $j < $len; ++$j) {
-					$ek .= chr(ord($this->encryptdata['key'][$j]) ^ $i);
+					$ek .= chr((int) ord($this->encryptdata['key'][$j]) ^ $i);
 				}
 				$enc = TCPDF_STATIC::_RC4($ek, $enc, $this->last_enc_key, $this->last_enc_key_c);
 			}
@@ -10657,7 +10657,7 @@ class TCPDF {
 				for ($i = 1; $i <= 19; ++$i) {
 					$ek = '';
 					for ($j = 0; $j < $len; ++$j) {
-						$ek .= chr(ord($owner_key[$j]) ^ $i);
+						$ek .= chr((int) ord($owner_key[$j]) ^ $i);
 					}
 					$enc = TCPDF_STATIC::_RC4($ek, $enc, $this->last_enc_key, $this->last_enc_key_c);
 				}
@@ -10697,7 +10697,7 @@ class TCPDF {
 		$psw = ''; // password to be returned
 		$psw_array = TCPDF_FONTS::utf8Bidi(TCPDF_FONTS::UTF8StringToArray($password, $this->isunicode, $this->CurrentFont), $password, $this->rtl, $this->isunicode, $this->CurrentFont);
 		foreach ($psw_array as $c) {
-			$psw .= TCPDF_FONTS::unichr($c, $this->isunicode);
+			$psw .= TCPDF_FONTS::unichr((int) $c, $this->isunicode);
 		}
 		return substr($psw, 0, 127);
 	}
@@ -10729,7 +10729,7 @@ class TCPDF {
 				$this->encryptdata['P'] = $this->encryptdata['protection'];
 				// Computing the encryption dictionary's Perms (permissions) value
 				$perms = TCPDF_STATIC::getEncPermissionsString($this->encryptdata['protection']); // bytes 0-3
-				$perms .= chr(255).chr(255).chr(255).chr(255); // bytes 4-7
+				$perms .= chr((int) 255).chr((int) 255).chr((int) 255).chr((int) 255); // bytes 4-7
 				if (isset($this->encryptdata['CF']['EncryptMetadata']) AND (!$this->encryptdata['CF']['EncryptMetadata'])) { // byte 8
 					$perms .= 'F';
 				} else {
@@ -12811,8 +12811,8 @@ class TCPDF {
 		$popt['ap']['n'] = array();
 		$fx = ((($w - $this->getAbsFontMeasure($tmpfont['cw'][108])) / 2) * $this->k);
 		$fy = (($w - ((($tmpfont['desc']['Ascent'] - $tmpfont['desc']['Descent']) * $this->FontSizePt / 1000) / $this->k)) * $this->k);
-		$popt['ap']['n'][$onvalue] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr(108).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
-		$popt['ap']['n']['Off'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr(109).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
+		$popt['ap']['n'][$onvalue] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr((int) 108).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
+		$popt['ap']['n']['Off'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr((int) 109).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
 		if (!isset($popt['mk'])) {
 			$popt['mk'] = array();
 		}
@@ -13066,8 +13066,8 @@ class TCPDF {
 		$popt['ap']['n'] = array();
 		$fx = ((($w - $this->getAbsFontMeasure($tmpfont['cw'][110])) / 2) * $this->k);
 		$fy = (($w - ((($tmpfont['desc']['Ascent'] - $tmpfont['desc']['Descent']) * $this->FontSizePt / 1000) / $this->k)) * $this->k);
-		$popt['ap']['n']['Yes'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr(110).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
-		$popt['ap']['n']['Off'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr(111).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
+		$popt['ap']['n']['Yes'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr((int) 110).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
+		$popt['ap']['n']['Off'] = sprintf('q %s BT /F%d %F Tf %F %F Td ('.chr((int) 111).') Tj ET Q', $this->TextColor, $tmpfont['i'], $this->FontSizePt, $fx, $fy);
 		// merge options
 		$opt = array_merge($popt, $opt);
 		// set remaining annotation data
@@ -14388,7 +14388,7 @@ class TCPDF {
 		$this->gradients[$n]['stream'] = '';
 		$count_patch = count($patch_array);
 		for ($i=0; $i < $count_patch; ++$i) {
-			$this->gradients[$n]['stream'] .= chr($patch_array[$i]['f']); //start with the edge flag as 8 bit
+			$this->gradients[$n]['stream'] .= chr((int) $patch_array[$i]['f']); //start with the edge flag as 8 bit
 			$count_points = count($patch_array[$i]['points']);
 			for ($j=0; $j < $count_points; ++$j) {
 				//each point as 16 bit
@@ -14399,15 +14399,15 @@ class TCPDF {
 				if ($patch_array[$i]['points'][$j] > $bpcd) {
 					$patch_array[$i]['points'][$j] = $bpcd;
 				}
-				$this->gradients[$n]['stream'] .= chr(floor($patch_array[$i]['points'][$j] / 256));
-				$this->gradients[$n]['stream'] .= chr(floor($patch_array[$i]['points'][$j] % 256));
+				$this->gradients[$n]['stream'] .= chr((int) floor($patch_array[$i]['points'][$j] / 256));
+				$this->gradients[$n]['stream'] .= chr((int) floor($patch_array[$i]['points'][$j] % 256));
 			}
 			$count_cols = count($patch_array[$i]['colors']);
 			for ($j=0; $j < $count_cols; ++$j) {
 				//each color component as 8 bit
-				$this->gradients[$n]['stream'] .= chr($patch_array[$i]['colors'][$j]['r']);
-				$this->gradients[$n]['stream'] .= chr($patch_array[$i]['colors'][$j]['g']);
-				$this->gradients[$n]['stream'] .= chr($patch_array[$i]['colors'][$j]['b']);
+				$this->gradients[$n]['stream'] .= chr((int) $patch_array[$i]['colors'][$j]['r']);
+				$this->gradients[$n]['stream'] .= chr((int) $patch_array[$i]['colors'][$j]['g']);
+				$this->gradients[$n]['stream'] .= chr((int) $patch_array[$i]['colors'][$j]['b']);
 			}
 		}
 		//paint the gradient
@@ -16356,7 +16356,7 @@ class TCPDF {
 		$html = preg_replace('/<\/(table|tr|td|th|blockquote|dd|dt|dl|div|dt|h1|h2|h3|h4|h5|h6|hr|li|ol|ul|p)>[\s]+</', '</\\1><', $html);
 		$html = preg_replace('/<\/(td|th)>/', '<marker style="font-size:0"/></\\1>', $html);
 		$html = preg_replace('/<\/table>([\s]*)<marker style="font-size:0"\/>/', '</table>', $html);
-		$html = preg_replace('/'.$this->re_space['p'].'+<img/'.$this->re_space['m'], chr(32).'<img', $html);
+		$html = preg_replace('/'.$this->re_space['p'].'+<img/'.$this->re_space['m'], chr((int) 32).'<img', $html);
 		$html = preg_replace('/<img([^\>]*)>[\s]+([^\<])/xi', '<img\\1>&nbsp;\\2', $html);
 		$html = preg_replace('/<img([^\>]*)>/xi', '<img\\1><span><marker style="font-size:0"/></span>', $html);
 		$html = preg_replace('/<xre/', '<pre', $html); // restore pre tag
@@ -16367,7 +16367,7 @@ class TCPDF {
 		$html = preg_replace('/[\s]<\/([^\>]*)>/', '&nbsp;</\\1>', $html); // preserve some spaces
 		$html = preg_replace('/<su([bp])/', '<zws/><su\\1', $html); // fix sub/sup alignment
 		$html = preg_replace('/<\/su([bp])>/', '</su\\1><zws/>', $html); // fix sub/sup alignment
-		$html = preg_replace('/'.$this->re_space['p'].'+/'.$this->re_space['m'], chr(32), $html); // replace multiple spaces with a single space
+		$html = preg_replace('/'.$this->re_space['p'].'+/'.$this->re_space['m'], chr((int) 32), $html); // replace multiple spaces with a single space
 		// trim string
 		$html = $this->stringTrim($html);
 		// fix br tag after li
@@ -17025,9 +17025,9 @@ class TCPDF {
 	 * @since 4.8.024 (2010-01-15)
 	 */
 	protected function getSpaceString() {
-		$spacestr = chr(32);
+		$spacestr = chr((int) 32);
 		if ($this->isUnicodeFont()) {
-			$spacestr = chr(0).chr(32);
+			$spacestr = chr((int) 0).chr((int) 32);
 		}
 		return $spacestr;
 	}
@@ -17600,7 +17600,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						if ($this->rMargin != $prevrMargin) {
 							$tw += ($prevrMargin - $this->rMargin);
 						}
-						$one_space_width = $this->GetStringWidth(chr(32));
+						$one_space_width = $this->GetStringWidth(chr((int) 32));
 						$no = 0; // number of spaces on a line contained on a single block
 						if ($this->isRTLTextDir()) { // RTL
 							// remove left space if exist
@@ -17608,10 +17608,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							if ($pos1 > 0) {
 								$pos1 = intval($pos1);
 								if ($this->isUnicodeFont()) {
-									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(0).chr(32)));
+									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr((int) 0).chr((int) 32)));
 									$spacelen = 2;
 								} else {
-									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(32)));
+									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr((int) 32)));
 									$spacelen = 1;
 								}
 								if ($pos1 == $pos2) {
@@ -17629,10 +17629,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							if ($pos1 > 0) {
 								$pos1 = intval($pos1);
 								if ($this->isUnicodeFont()) {
-									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(0).chr(32).')]')) + 2;
+									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr((int) 0).chr((int) 32).')]')) + 2;
 									$spacelen = 2;
 								} else {
-									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(32).')]')) + 1;
+									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr((int) 32).')]')) + 1;
 									$spacelen = 1;
 								}
 								if ($pos1 == $pos2) {
@@ -17885,7 +17885,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 											$replace = $pamatch[1][$pk];
 											$replace = str_replace('#!#OP#!#', '(', $replace);
 											$replace = str_replace('#!#CP#!#', ')', $replace);
-											$newpmid = '[('.str_replace(chr(0).chr(32), ') '.sprintf('%F', $spacew).' (', $replace).')]';
+											$newpmid = '[('.str_replace(chr((int) 0).chr((int) 32), ') '.sprintf('%F', $spacew).' (', $replace).')]';
 											$pos = strpos($pmid, $pmatch, $pos);
 											if ($pos !== FALSE) {
 												$pmid = substr_replace($pmid, $newpmid, $pos, strlen($pmatch));
@@ -18342,7 +18342,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				} else {
 					$firstblock = false;
 					// replace empty multiple spaces string with a single space
-					$dom[$key]['value'] = preg_replace('/^'.$this->re_space['p'].'+$/'.$this->re_space['m'], chr(32), $dom[$key]['value']);
+					$dom[$key]['value'] = preg_replace('/^'.$this->re_space['p'].'+$/'.$this->re_space['m'], chr((int) 32), $dom[$key]['value']);
 				}
 				$strrest = '';
 				if ($this->rtl) {
@@ -18547,7 +18547,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				if ($this->rMargin != $prevrMargin) {
 					$tw += ($prevrMargin - $this->rMargin);
 				}
-				$one_space_width = $this->GetStringWidth(chr(32));
+				$one_space_width = $this->GetStringWidth(chr((int) 32));
 				$no = 0; // number of spaces on a line contained on a single block
 				if ($this->isRTLTextDir()) { // RTL
 					// remove left space if exist
@@ -18555,10 +18555,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					if ($pos1 > 0) {
 						$pos1 = intval($pos1);
 						if ($this->isUnicodeFont()) {
-							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(0).chr(32)));
+							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr((int) 0).chr((int) 32)));
 							$spacelen = 2;
 						} else {
-							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(32)));
+							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr((int) 32)));
 							$spacelen = 1;
 						}
 						if ($pos1 == $pos2) {
@@ -18576,10 +18576,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					if ($pos1 > 0) {
 						$pos1 = intval($pos1);
 						if ($this->isUnicodeFont()) {
-							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(0).chr(32).')]')) + 2;
+							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr((int) 0).chr((int) 32).')]')) + 2;
 							$spacelen = 2;
 						} else {
-							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(32).')]')) + 1;
+							$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr((int) 32).')]')) + 1;
 							$spacelen = 1;
 						}
 						if ($pos1 == $pos2) {
@@ -19075,7 +19075,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				}
 				$h = $this->getCellHeight($this->FontSize);
 				if (isset($tag['attribute']['size']) AND !TCPDF_STATIC::empty_string($tag['attribute']['size'])) {
-					$w = intval($tag['attribute']['size']) * $this->GetStringWidth(chr(32)) * 2;
+					$w = intval($tag['attribute']['size']) * $this->GetStringWidth(chr((int) 32)) * 2;
 				} else {
 					$w = $h;
 				}
@@ -19230,7 +19230,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$opt['v'] = $tag['attribute']['value'];
 				}
 				if (isset($tag['attribute']['cols']) AND !TCPDF_STATIC::empty_string($tag['attribute']['cols'])) {
-					$w = intval($tag['attribute']['cols']) * $this->GetStringWidth(chr(32)) * 2;
+					$w = intval($tag['attribute']['cols']) * $this->GetStringWidth(chr((int) 32)) * 2;
 				} else {
 					$w = 40;
 				}
@@ -20441,17 +20441,17 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			case 'a':
 			case 'lower-alpha':
 			case 'lower-latin': {
-				$textitem = chr(97 + $this->listcount[$this->listnum] - 1);
+				$textitem = chr((int) 97 + $this->listcount[$this->listnum] - 1);
 				break;
 			}
 			case 'A':
 			case 'upper-alpha':
 			case 'upper-latin': {
-				$textitem = chr(65 + $this->listcount[$this->listnum] - 1);
+				$textitem = chr((int) 65 + $this->listcount[$this->listnum] - 1);
 				break;
 			}
 			case 'lower-greek': {
-				$textitem = TCPDF_FONTS::unichr((945 + $this->listcount[$this->listnum] - 1), $this->isunicode);
+				$textitem = TCPDF_FONTS::unichr((int) (945 + $this->listcount[$this->listnum] - 1), $this->isunicode);
 				break;
 			}
 			/*
@@ -21269,7 +21269,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 		$fontfamily = $this->FontFamily;
 		$fontstyle = $this->FontStyle;
 		$w = $this->w - $this->lMargin - $this->rMargin;
-		$spacer = $this->GetStringWidth(chr(32)) * 4;
+		$spacer = $this->GetStringWidth(chr((int) 32)) * 4;
 		$lmargin = $this->lMargin;
 		$rmargin = $this->rMargin;
 		$x_start = $this->GetX();
@@ -22041,10 +22041,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$word = array();
 				}
 				$txtarr[] = $char;
-				if (chr($char) == '<') {
+				if (chr((int) $char) == '<') {
 					// we are inside an HTML tag
 					$intag = true;
-				} elseif ($intag AND (chr($char) == '>')) {
+				} elseif ($intag AND (chr((int) $char) == '>')) {
 					// end of HTML tag
 					$intag = false;
 					// check for style tag

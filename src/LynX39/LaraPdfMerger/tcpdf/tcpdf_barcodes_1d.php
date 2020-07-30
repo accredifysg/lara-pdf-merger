@@ -485,38 +485,38 @@ class TCPDFBarcode {
 	 */
 	protected function encode_code39_ext($code) {
 		$encode = array(
-			chr(0) => '%U', chr(1) => '$A', chr(2) => '$B', chr(3) => '$C',
-			chr(4) => '$D', chr(5) => '$E', chr(6) => '$F', chr(7) => '$G',
-			chr(8) => '$H', chr(9) => '$I', chr(10) => '$J', chr(11) => '£K',
-			chr(12) => '$L', chr(13) => '$M', chr(14) => '$N', chr(15) => '$O',
-			chr(16) => '$P', chr(17) => '$Q', chr(18) => '$R', chr(19) => '$S',
-			chr(20) => '$T', chr(21) => '$U', chr(22) => '$V', chr(23) => '$W',
-			chr(24) => '$X', chr(25) => '$Y', chr(26) => '$Z', chr(27) => '%A',
-			chr(28) => '%B', chr(29) => '%C', chr(30) => '%D', chr(31) => '%E',
-			chr(32) => ' ', chr(33) => '/A', chr(34) => '/B', chr(35) => '/C',
-			chr(36) => '/D', chr(37) => '/E', chr(38) => '/F', chr(39) => '/G',
-			chr(40) => '/H', chr(41) => '/I', chr(42) => '/J', chr(43) => '/K',
-			chr(44) => '/L', chr(45) => '-', chr(46) => '.', chr(47) => '/O',
-			chr(48) => '0', chr(49) => '1', chr(50) => '2', chr(51) => '3',
-			chr(52) => '4', chr(53) => '5', chr(54) => '6', chr(55) => '7',
-			chr(56) => '8', chr(57) => '9', chr(58) => '/Z', chr(59) => '%F',
-			chr(60) => '%G', chr(61) => '%H', chr(62) => '%I', chr(63) => '%J',
-			chr(64) => '%V', chr(65) => 'A', chr(66) => 'B', chr(67) => 'C',
-			chr(68) => 'D', chr(69) => 'E', chr(70) => 'F', chr(71) => 'G',
-			chr(72) => 'H', chr(73) => 'I', chr(74) => 'J', chr(75) => 'K',
-			chr(76) => 'L', chr(77) => 'M', chr(78) => 'N', chr(79) => 'O',
-			chr(80) => 'P', chr(81) => 'Q', chr(82) => 'R', chr(83) => 'S',
-			chr(84) => 'T', chr(85) => 'U', chr(86) => 'V', chr(87) => 'W',
-			chr(88) => 'X', chr(89) => 'Y', chr(90) => 'Z', chr(91) => '%K',
-			chr(92) => '%L', chr(93) => '%M', chr(94) => '%N', chr(95) => '%O',
-			chr(96) => '%W', chr(97) => '+A', chr(98) => '+B', chr(99) => '+C',
-			chr(100) => '+D', chr(101) => '+E', chr(102) => '+F', chr(103) => '+G',
-			chr(104) => '+H', chr(105) => '+I', chr(106) => '+J', chr(107) => '+K',
-			chr(108) => '+L', chr(109) => '+M', chr(110) => '+N', chr(111) => '+O',
-			chr(112) => '+P', chr(113) => '+Q', chr(114) => '+R', chr(115) => '+S',
-			chr(116) => '+T', chr(117) => '+U', chr(118) => '+V', chr(119) => '+W',
-			chr(120) => '+X', chr(121) => '+Y', chr(122) => '+Z', chr(123) => '%P',
-			chr(124) => '%Q', chr(125) => '%R', chr(126) => '%S', chr(127) => '%T');
+			chr((int) 0) => '%U', chr((int) 1) => '$A', chr((int) 2) => '$B', chr((int) 3) => '$C',
+			chr((int) 4) => '$D', chr((int) 5) => '$E', chr((int) 6) => '$F', chr((int) 7) => '$G',
+			chr((int) 8) => '$H', chr((int) 9) => '$I', chr((int) 10) => '$J', chr((int) 11) => '£K',
+			chr((int) 12) => '$L', chr((int) 13) => '$M', chr((int) 14) => '$N', chr((int) 15) => '$O',
+			chr((int) 16) => '$P', chr((int) 17) => '$Q', chr((int) 18) => '$R', chr((int) 19) => '$S',
+			chr((int) 20) => '$T', chr((int) 21) => '$U', chr((int) 22) => '$V', chr((int) 23) => '$W',
+			chr((int) 24) => '$X', chr((int) 25) => '$Y', chr((int) 26) => '$Z', chr((int) 27) => '%A',
+			chr((int) 28) => '%B', chr((int) 29) => '%C', chr((int) 30) => '%D', chr((int) 31) => '%E',
+			chr((int) 32) => ' ', chr((int) 33) => '/A', chr((int) 34) => '/B', chr((int) 35) => '/C',
+			chr((int) 36) => '/D', chr((int) 37) => '/E', chr((int) 38) => '/F', chr((int) 39) => '/G',
+			chr((int) 40) => '/H', chr((int) 41) => '/I', chr((int) 42) => '/J', chr((int) 43) => '/K',
+			chr((int) 44) => '/L', chr((int) 45) => '-', chr((int) 46) => '.', chr((int) 47) => '/O',
+			chr((int) 48) => '0', chr((int) 49) => '1', chr((int) 50) => '2', chr((int) 51) => '3',
+			chr((int) 52) => '4', chr((int) 53) => '5', chr((int) 54) => '6', chr((int) 55) => '7',
+			chr((int) 56) => '8', chr((int) 57) => '9', chr((int) 58) => '/Z', chr((int) 59) => '%F',
+			chr((int) 60) => '%G', chr((int) 61) => '%H', chr((int) 62) => '%I', chr((int) 63) => '%J',
+			chr((int) 64) => '%V', chr((int) 65) => 'A', chr((int) 66) => 'B', chr((int) 67) => 'C',
+			chr((int) 68) => 'D', chr((int) 69) => 'E', chr((int) 70) => 'F', chr((int) 71) => 'G',
+			chr((int) 72) => 'H', chr((int) 73) => 'I', chr((int) 74) => 'J', chr((int) 75) => 'K',
+			chr((int) 76) => 'L', chr((int) 77) => 'M', chr((int) 78) => 'N', chr((int) 79) => 'O',
+			chr((int) 80) => 'P', chr((int) 81) => 'Q', chr((int) 82) => 'R', chr((int) 83) => 'S',
+			chr((int) 84) => 'T', chr((int) 85) => 'U', chr((int) 86) => 'V', chr((int) 87) => 'W',
+			chr((int) 88) => 'X', chr((int) 89) => 'Y', chr((int) 90) => 'Z', chr((int) 91) => '%K',
+			chr((int) 92) => '%L', chr((int) 93) => '%M', chr((int) 94) => '%N', chr((int) 95) => '%O',
+			chr((int) 96) => '%W', chr((int) 97) => '+A', chr((int) 98) => '+B', chr((int) 99) => '+C',
+			chr((int) 100) => '+D', chr((int) 101) => '+E', chr((int) 102) => '+F', chr((int) 103) => '+G',
+			chr((int) 104) => '+H', chr((int) 105) => '+I', chr((int) 106) => '+J', chr((int) 107) => '+K',
+			chr((int) 108) => '+L', chr((int) 109) => '+M', chr((int) 110) => '+N', chr((int) 111) => '+O',
+			chr((int) 112) => '+P', chr((int) 113) => '+Q', chr((int) 114) => '+R', chr((int) 115) => '+S',
+			chr((int) 116) => '+T', chr((int) 117) => '+U', chr((int) 118) => '+V', chr((int) 119) => '+W',
+			chr((int) 120) => '+X', chr((int) 121) => '+Y', chr((int) 122) => '+Z', chr((int) 123) => '%P',
+			chr((int) 124) => '%Q', chr((int) 125) => '%R', chr((int) 126) => '%S', chr((int) 127) => '%T');
 		$code_ext = '';
 		$clen = strlen($code);
 		for ($i = 0 ; $i < $clen; ++$i) {
@@ -608,38 +608,38 @@ class TCPDFBarcode {
 		$chr[42] = '111141'; // start-stop
 		$code = strtoupper($code);
 		$encode = array(
-			chr(0) => chr(131).'U', chr(1) => chr(128).'A', chr(2) => chr(128).'B', chr(3) => chr(128).'C',
-			chr(4) => chr(128).'D', chr(5) => chr(128).'E', chr(6) => chr(128).'F', chr(7) => chr(128).'G',
-			chr(8) => chr(128).'H', chr(9) => chr(128).'I', chr(10) => chr(128).'J', chr(11) => '£K',
-			chr(12) => chr(128).'L', chr(13) => chr(128).'M', chr(14) => chr(128).'N', chr(15) => chr(128).'O',
-			chr(16) => chr(128).'P', chr(17) => chr(128).'Q', chr(18) => chr(128).'R', chr(19) => chr(128).'S',
-			chr(20) => chr(128).'T', chr(21) => chr(128).'U', chr(22) => chr(128).'V', chr(23) => chr(128).'W',
-			chr(24) => chr(128).'X', chr(25) => chr(128).'Y', chr(26) => chr(128).'Z', chr(27) => chr(131).'A',
-			chr(28) => chr(131).'B', chr(29) => chr(131).'C', chr(30) => chr(131).'D', chr(31) => chr(131).'E',
-			chr(32) => ' ', chr(33) => chr(129).'A', chr(34) => chr(129).'B', chr(35) => chr(129).'C',
-			chr(36) => chr(129).'D', chr(37) => chr(129).'E', chr(38) => chr(129).'F', chr(39) => chr(129).'G',
-			chr(40) => chr(129).'H', chr(41) => chr(129).'I', chr(42) => chr(129).'J', chr(43) => chr(129).'K',
-			chr(44) => chr(129).'L', chr(45) => '-', chr(46) => '.', chr(47) => chr(129).'O',
-			chr(48) => '0', chr(49) => '1', chr(50) => '2', chr(51) => '3',
-			chr(52) => '4', chr(53) => '5', chr(54) => '6', chr(55) => '7',
-			chr(56) => '8', chr(57) => '9', chr(58) => chr(129).'Z', chr(59) => chr(131).'F',
-			chr(60) => chr(131).'G', chr(61) => chr(131).'H', chr(62) => chr(131).'I', chr(63) => chr(131).'J',
-			chr(64) => chr(131).'V', chr(65) => 'A', chr(66) => 'B', chr(67) => 'C',
-			chr(68) => 'D', chr(69) => 'E', chr(70) => 'F', chr(71) => 'G',
-			chr(72) => 'H', chr(73) => 'I', chr(74) => 'J', chr(75) => 'K',
-			chr(76) => 'L', chr(77) => 'M', chr(78) => 'N', chr(79) => 'O',
-			chr(80) => 'P', chr(81) => 'Q', chr(82) => 'R', chr(83) => 'S',
-			chr(84) => 'T', chr(85) => 'U', chr(86) => 'V', chr(87) => 'W',
-			chr(88) => 'X', chr(89) => 'Y', chr(90) => 'Z', chr(91) => chr(131).'K',
-			chr(92) => chr(131).'L', chr(93) => chr(131).'M', chr(94) => chr(131).'N', chr(95) => chr(131).'O',
-			chr(96) => chr(131).'W', chr(97) => chr(130).'A', chr(98) => chr(130).'B', chr(99) => chr(130).'C',
-			chr(100) => chr(130).'D', chr(101) => chr(130).'E', chr(102) => chr(130).'F', chr(103) => chr(130).'G',
-			chr(104) => chr(130).'H', chr(105) => chr(130).'I', chr(106) => chr(130).'J', chr(107) => chr(130).'K',
-			chr(108) => chr(130).'L', chr(109) => chr(130).'M', chr(110) => chr(130).'N', chr(111) => chr(130).'O',
-			chr(112) => chr(130).'P', chr(113) => chr(130).'Q', chr(114) => chr(130).'R', chr(115) => chr(130).'S',
-			chr(116) => chr(130).'T', chr(117) => chr(130).'U', chr(118) => chr(130).'V', chr(119) => chr(130).'W',
-			chr(120) => chr(130).'X', chr(121) => chr(130).'Y', chr(122) => chr(130).'Z', chr(123) => chr(131).'P',
-			chr(124) => chr(131).'Q', chr(125) => chr(131).'R', chr(126) => chr(131).'S', chr(127) => chr(131).'T');
+			chr((int) 0) => chr((int) 131).'U', chr((int) 1) => chr((int) 128).'A', chr((int) 2) => chr((int) 128).'B', chr((int) 3) => chr((int) 128).'C',
+			chr((int) 4) => chr((int) 128).'D', chr((int) 5) => chr((int) 128).'E', chr((int) 6) => chr((int) 128).'F', chr((int) 7) => chr((int) 128).'G',
+			chr((int) 8) => chr((int) 128).'H', chr((int) 9) => chr((int) 128).'I', chr((int) 10) => chr((int) 128).'J', chr((int) 11) => '£K',
+			chr((int) 12) => chr((int) 128).'L', chr((int) 13) => chr((int) 128).'M', chr((int) 14) => chr((int) 128).'N', chr((int) 15) => chr((int) 128).'O',
+			chr((int) 16) => chr((int) 128).'P', chr((int) 17) => chr((int) 128).'Q', chr((int) 18) => chr((int) 128).'R', chr((int) 19) => chr((int) 128).'S',
+			chr((int) 20) => chr((int) 128).'T', chr((int) 21) => chr((int) 128).'U', chr((int) 22) => chr((int) 128).'V', chr((int) 23) => chr((int) 128).'W',
+			chr((int) 24) => chr((int) 128).'X', chr((int) 25) => chr((int) 128).'Y', chr((int) 26) => chr((int) 128).'Z', chr((int) 27) => chr((int) 131).'A',
+			chr((int) 28) => chr((int) 131).'B', chr((int) 29) => chr((int) 131).'C', chr((int) 30) => chr((int) 131).'D', chr((int) 31) => chr((int) 131).'E',
+			chr((int) 32) => ' ', chr((int) 33) => chr((int) 129).'A', chr((int) 34) => chr((int) 129).'B', chr((int) 35) => chr((int) 129).'C',
+			chr((int) 36) => chr((int) 129).'D', chr((int) 37) => chr((int) 129).'E', chr((int) 38) => chr((int) 129).'F', chr((int) 39) => chr((int) 129).'G',
+			chr((int) 40) => chr((int) 129).'H', chr((int) 41) => chr((int) 129).'I', chr((int) 42) => chr((int) 129).'J', chr((int) 43) => chr((int) 129).'K',
+			chr((int) 44) => chr((int) 129).'L', chr((int) 45) => '-', chr((int) 46) => '.', chr((int) 47) => chr((int) 129).'O',
+			chr((int) 48) => '0', chr((int) 49) => '1', chr((int) 50) => '2', chr((int) 51) => '3',
+			chr((int) 52) => '4', chr((int) 53) => '5', chr((int) 54) => '6', chr((int) 55) => '7',
+			chr((int) 56) => '8', chr((int) 57) => '9', chr((int) 58) => chr((int) 129).'Z', chr((int) 59) => chr((int) 131).'F',
+			chr((int) 60) => chr((int) 131).'G', chr((int) 61) => chr((int) 131).'H', chr((int) 62) => chr((int) 131).'I', chr((int) 63) => chr((int) 131).'J',
+			chr((int) 64) => chr((int) 131).'V', chr((int) 65) => 'A', chr((int) 66) => 'B', chr((int) 67) => 'C',
+			chr((int) 68) => 'D', chr((int) 69) => 'E', chr((int) 70) => 'F', chr((int) 71) => 'G',
+			chr((int) 72) => 'H', chr((int) 73) => 'I', chr((int) 74) => 'J', chr((int) 75) => 'K',
+			chr((int) 76) => 'L', chr((int) 77) => 'M', chr((int) 78) => 'N', chr((int) 79) => 'O',
+			chr((int) 80) => 'P', chr((int) 81) => 'Q', chr((int) 82) => 'R', chr((int) 83) => 'S',
+			chr((int) 84) => 'T', chr((int) 85) => 'U', chr((int) 86) => 'V', chr((int) 87) => 'W',
+			chr((int) 88) => 'X', chr((int) 89) => 'Y', chr((int) 90) => 'Z', chr((int) 91) => chr((int) 131).'K',
+			chr((int) 92) => chr((int) 131).'L', chr((int) 93) => chr((int) 131).'M', chr((int) 94) => chr((int) 131).'N', chr((int) 95) => chr((int) 131).'O',
+			chr((int) 96) => chr((int) 131).'W', chr((int) 97) => chr((int) 130).'A', chr((int) 98) => chr((int) 130).'B', chr((int) 99) => chr((int) 130).'C',
+			chr((int) 100) => chr((int) 130).'D', chr((int) 101) => chr((int) 130).'E', chr((int) 102) => chr((int) 130).'F', chr((int) 103) => chr((int) 130).'G',
+			chr((int) 104) => chr((int) 130).'H', chr((int) 105) => chr((int) 130).'I', chr((int) 106) => chr((int) 130).'J', chr((int) 107) => chr((int) 130).'K',
+			chr((int) 108) => chr((int) 130).'L', chr((int) 109) => chr((int) 130).'M', chr((int) 110) => chr((int) 130).'N', chr((int) 111) => chr((int) 130).'O',
+			chr((int) 112) => chr((int) 130).'P', chr((int) 113) => chr((int) 130).'Q', chr((int) 114) => chr((int) 130).'R', chr((int) 115) => chr((int) 130).'S',
+			chr((int) 116) => chr((int) 130).'T', chr((int) 117) => chr((int) 130).'U', chr((int) 118) => chr((int) 130).'V', chr((int) 119) => chr((int) 130).'W',
+			chr((int) 120) => chr((int) 130).'X', chr((int) 121) => chr((int) 130).'Y', chr((int) 122) => chr((int) 130).'Z', chr((int) 123) => chr((int) 131).'P',
+			chr((int) 124) => chr((int) 131).'Q', chr((int) 125) => chr((int) 131).'R', chr((int) 126) => chr((int) 131).'S', chr((int) 127) => chr((int) 131).'T');
 		$code_ext = '';
 		$clen = strlen($code);
 		for ($i = 0 ; $i < $clen; ++$i) {
@@ -693,7 +693,7 @@ class TCPDFBarcode {
 			'W', 'X', 'Y', 'Z', '-', '.', ' ', '$', '/', '+', '%',
 			'<', '=', '>', '?');
 		// translate special characters
-		$code = strtr($code, chr(128).chr(131).chr(129).chr(130), '<=>?');
+		$code = strtr($code, chr((int) 128).chr((int) 131).chr((int) 129).chr((int) 130), '<=>?');
 		$len = strlen($code);
 		// calculate check digit C
 		$p = 1;
@@ -724,7 +724,7 @@ class TCPDFBarcode {
 		$k = $chars[$check];
 		$checksum = $c.$k;
 		// resto respecial characters
-		$checksum = strtr($checksum, '<=>?', chr(128).chr(131).chr(129).chr(130));
+		$checksum = strtr($checksum, '<=>?', chr((int) 128).chr((int) 131).chr((int) 129).chr((int) 130));
 		return $checksum;
 	}
 
@@ -1068,12 +1068,12 @@ class TCPDFBarcode {
 		);
 		// ASCII characters for code A (ASCII 00 - 95)
 		$keys_a = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_';
-		$keys_a .= chr(0).chr(1).chr(2).chr(3).chr(4).chr(5).chr(6).chr(7).chr(8).chr(9);
-		$keys_a .= chr(10).chr(11).chr(12).chr(13).chr(14).chr(15).chr(16).chr(17).chr(18).chr(19);
-		$keys_a .= chr(20).chr(21).chr(22).chr(23).chr(24).chr(25).chr(26).chr(27).chr(28).chr(29);
-		$keys_a .= chr(30).chr(31);
+		$keys_a .= chr((int) 0).chr((int) 1).chr((int) 2).chr((int) 3).chr((int) 4).chr((int) 5).chr((int) 6).chr((int) 7).chr((int) 8).chr((int) 9);
+		$keys_a .= chr((int) 10).chr((int) 11).chr((int) 12).chr((int) 13).chr((int) 14).chr((int) 15).chr((int) 16).chr((int) 17).chr((int) 18).chr((int) 19);
+		$keys_a .= chr((int) 20).chr((int) 21).chr((int) 22).chr((int) 23).chr((int) 24).chr((int) 25).chr((int) 26).chr((int) 27).chr((int) 28).chr((int) 29);
+		$keys_a .= chr((int) 30).chr((int) 31);
 		// ASCII characters for code B (ASCII 32 - 127)
-		$keys_b = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'.chr(127);
+		$keys_b = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'.chr((int) 127);
 		// special codes
 		$fnc_a = array(241 => 102, 242 => 97, 243 => 96, 244 => 101);
 		$fnc_b = array(241 => 102, 242 => 97, 243 => 96, 244 => 100);

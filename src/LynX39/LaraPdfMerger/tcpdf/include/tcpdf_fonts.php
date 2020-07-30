@@ -226,7 +226,7 @@ class TCPDF_FONTS {
 			$eplain = '';
 			for ($i = 0; $i < $elen; ++$i) {
 				$chr = ord($encrypted[$i]);
-				$eplain .= chr($chr ^ ($r >> 8));
+				$eplain .= chr((int) $chr ^ ($r >> 8));
 				$r = ((($chr + $r) * $c1 + $c2) % 65536);
 			}
 			if (preg_match('#/ForceBold[\s]*([^\s]*)#', $eplain, $matches) > 0) {
@@ -328,7 +328,7 @@ class TCPDF_FONTS {
 						$cdec[$ck] = ((-($ccom[$i] - 251) * 256) - $ccom[($i + 1)] - 108);
 						$i += 2;
 					} elseif ($ccom[$i] == 255) {
-						$sval = chr($ccom[($i + 1)]).chr($ccom[($i + 2)]).chr($ccom[($i + 3)]).chr($ccom[($i + 4)]);
+						$sval = chr((int) $ccom[($i + 1)]).chr((int) $ccom[($i + 2)]).chr((int) $ccom[($i + 3)]).chr((int) $ccom[($i + 4)]);
 						$vsval = unpack('li', $sval);
 						$cdec[$ck] = $vsval['i'];
 						$i += 5;
@@ -1508,8 +1508,8 @@ class TCPDF_FONTS {
 			if ($gid > 0xFFFF) {
 				$gid -= 0x10000;
 			}
-			$map[($cid * 2)] = chr($gid >> 8);
-			$map[(($cid * 2) + 1)] = chr($gid & 0xFF);
+			$map[($cid * 2)] = chr((int) $gid >> 8);
+			$map[(($cid * 2) + 1)] = chr((int) $gid & 0xFF);
 		}
 		return $map;
 	}
@@ -1665,19 +1665,19 @@ class TCPDF_FONTS {
 	 */
 	public static function unichr($c, $unicode=true) {
 		if (!$unicode) {
-			return chr($c);
+			return chr((int) $c);
 		} elseif ($c <= 0x7F) {
 			// one byte
-			return chr($c);
+			return chr((int) $c);
 		} elseif ($c <= 0x7FF) {
 			// two bytes
-			return chr(0xC0 | $c >> 6).chr(0x80 | $c & 0x3F);
+			return chr((int) 0xC0 | $c >> 6).chr((int) 0x80 | $c & 0x3F);
 		} elseif ($c <= 0xFFFF) {
 			// three bytes
-			return chr(0xE0 | $c >> 12).chr(0x80 | $c >> 6 & 0x3F).chr(0x80 | $c & 0x3F);
+			return chr((int) 0xE0 | $c >> 12).chr((int) 0x80 | $c >> 6 & 0x3F).chr((int) 0x80 | $c & 0x3F);
 		} elseif ($c <= 0x10FFFF) {
 			// four bytes
-			return chr(0xF0 | $c >> 18).chr(0x80 | $c >> 12 & 0x3F).chr(0x80 | $c >> 6 & 0x3F).chr(0x80 | $c & 0x3F);
+			return chr((int) 0xF0 | $c >> 18).chr((int) 0x80 | $c >> 12 & 0x3F).chr((int) 0x80 | $c >> 6 & 0x3F).chr((int) 0x80 | $c & 0x3F);
 		} else {
 			return '';
 		}
@@ -1690,7 +1690,7 @@ class TCPDF_FONTS {
 	 * @public static
 	 */
 	public static function unichrUnicode($c) {
-		return self::unichr($c, true);
+		return self::unichr((int) $c, true);
 	}
 
 	/**
@@ -1700,7 +1700,7 @@ class TCPDF_FONTS {
 	 * @public static
 	 */
 	public static function unichrASCII($c) {
-		return self::unichr($c, false);
+		return self::unichr((int) $c, false);
 	}
 
 	/**
@@ -1752,16 +1752,16 @@ class TCPDF_FONTS {
 			} elseif ($char == 0xFFFD) {
 				$outstr .= "\xFF\xFD"; // replacement character
 			} elseif ($char < 0x10000) {
-				$outstr .= chr($char >> 0x08);
-				$outstr .= chr($char & 0xFF);
+				$outstr .= chr((int) $char >> 0x08);
+				$outstr .= chr((int) $char & 0xFF);
 			} else {
 				$char -= 0x10000;
 				$w1 = 0xD800 | ($char >> 0x0a);
 				$w2 = 0xDC00 | ($char & 0x3FF);
-				$outstr .= chr($w1 >> 0x08);
-				$outstr .= chr($w1 & 0xFF);
-				$outstr .= chr($w2 >> 0x08);
-				$outstr .= chr($w2 & 0xFF);
+				$outstr .= chr((int) $w1 >> 0x08);
+				$outstr .= chr((int) $w1 & 0xFF);
+				$outstr .= chr((int) $w2 >> 0x08);
+				$outstr .= chr((int) $w2 & 0xFF);
 			}
 		}
 		return $outstr;
@@ -1800,7 +1800,7 @@ class TCPDF_FONTS {
 		}
 		$string = '';
 		for ($i = $start; $i < $end; ++$i) {
-			$string .= self::unichr($strarr[$i], $unicode);
+			$string .= self::unichr((int) $strarr[$i], $unicode);
 		}
 		return $string;
 	}
@@ -1865,10 +1865,10 @@ class TCPDF_FONTS {
 		$outstr = ''; // string to be returned
 		foreach ($unicode as $char) {
 			if ($char < 256) {
-				$outstr .= chr($char);
+				$outstr .= chr((int) $char);
 			} elseif (array_key_exists($char, TCPDF_FONT_DATA::$uni_utf8tolatin)) {
 				// map from UTF-8
-				$outstr .= chr(TCPDF_FONT_DATA::$uni_utf8tolatin[$char]);
+				$outstr .= chr((int) TCPDF_FONT_DATA::$uni_utf8tolatin[$char]);
 			} elseif ($char == 0xFFFD) {
 				// skip
 			} else {

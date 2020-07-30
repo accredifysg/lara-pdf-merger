@@ -634,19 +634,19 @@ class TCPDI extends FPDF_TPL {
                         $out .= $s[$count];
                         break;
                     case 'f':
-                        $out .= chr(0x0C);
+                        $out .= chr((int) 0x0C);
                         break;
                     case 'b':
-                        $out .= chr(0x08);
+                        $out .= chr((int) 0x08);
                         break;
                     case 't':
-                        $out .= chr(0x09);
+                        $out .= chr((int) 0x09);
                         break;
                     case 'r':
-                        $out .= chr(0x0D);
+                        $out .= chr((int) 0x0D);
                         break;
                     case 'n':
-                        $out .= chr(0x0A);
+                        $out .= chr((int) 0x0A);
                         break;
                     case "\r":
                         if ($count != $n-1 && $s[$count+1] == "\n")
@@ -670,7 +670,7 @@ class TCPDI extends FPDF_TPL {
                                 }                            
                             }
                             
-                            $out .= chr(octdec($oct));
+                            $out .= chr((int) octdec($oct));
                         } else {
                             $out .= $s[$count];
                         }

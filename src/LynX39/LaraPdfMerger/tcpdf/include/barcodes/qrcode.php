@@ -784,7 +784,7 @@ class QRcode {
 	 * @param $val (int) value of the character to set
 	 */
 	protected function setFrameAt($at, $val) {
-		$this->frame[$at['y']][$at['x']] = chr($val);
+		$this->frame[$at['y']][$at['x']] = chr((int) $val);
 	}
 
 	/**
@@ -948,11 +948,11 @@ class QRcode {
 			} else {
 				$v = 0x84;
 			}
-			$frame[8][$width - 1 - $i] = chr($v);
+			$frame[8][$width - 1 - $i] = chr((int) $v);
 			if ($i < 6) {
-				$frame[$i][8] = chr($v);
+				$frame[$i][8] = chr((int) $v);
 			} else {
-				$frame[$i + 1][8] = chr($v);
+				$frame[$i + 1][8] = chr((int) $v);
 			}
 			$format = $format >> 1;
 		}
@@ -963,11 +963,11 @@ class QRcode {
 		} else {
 			$v = 0x84;
 		}
-		$frame[$width - 7 + $i][8] = chr($v);
+		$frame[$width - 7 + $i][8] = chr((int) $v);
 		if ($i == 0) {
-			$frame[8][7] = chr($v);
+			$frame[8][7] = chr((int) $v);
 		} else {
-			$frame[8][6 - $i] = chr($v);
+			$frame[8][6 - $i] = chr((int) $v);
 		}
 		$format = $format >> 1;
 		}
@@ -1096,7 +1096,7 @@ class QRcode {
 		for ($y=0; $y<$width; ++$y) {
 			for ($x=0; $x<$width; ++$x) {
 				if ($bitMask[$y][$x] == 1) {
-					$d[$y][$x] = chr(ord($s[$y][$x]) ^ ((int)($bitMask[$y][$x])));
+					$d[$y][$x] = chr((int) ord($s[$y][$x]) ^ ((int)($bitMask[$y][$x])));
 				}
 				$b += (int)(ord($d[$y][$x]) & 1);
 			}
@@ -1490,7 +1490,7 @@ class QRcode {
 				$p += 2;
 			} else {
 				if ((ord($this->dataStr[$p]) >= ord('a')) AND (ord($this->dataStr[$p]) <= ord('z'))) {
-					$this->dataStr[$p] = chr(ord($this->dataStr[$p]) - 32);
+					$this->dataStr[$p] = chr((int) ord($this->dataStr[$p]) - 32);
 				}
 				$p++;
 			}
@@ -2559,8 +2559,8 @@ class QRcode {
 		// Timing pattern
 		$wo = $width - 15;
 		for ($i=1; $i < $wo; ++$i) {
-			$frame[6][7+$i] = chr(0x90 | ($i & 1));
-			$frame[7+$i][6] = chr(0x90 | ($i & 1));
+			$frame[6][7+$i] = chr((int) 0x90 | ($i & 1));
+			$frame[7+$i][6] = chr((int) 0x90 | ($i & 1));
 		}
 		// Alignment pattern
 		$frame = $this->putAlignmentPattern($version, $frame, $width);
@@ -2570,14 +2570,14 @@ class QRcode {
 			$v = $vinf;
 			for ($x=0; $x<6; ++$x) {
 				for ($y=0; $y<3; ++$y) {
-					$frame[($width - 11)+$y][$x] = chr(0x88 | ($v & 1));
+					$frame[($width - 11)+$y][$x] = chr((int) 0x88 | ($v & 1));
 					$v = $v >> 1;
 				}
 			}
 			$v = $vinf;
 			for ($y=0; $y<6; ++$y) {
 				for ($x=0; $x<3; ++$x) {
-					$frame[$y][$x+($width - 11)] = chr(0x88 | ($v & 1));
+					$frame[$y][$x+($width - 11)] = chr((int) 0x88 | ($v & 1));
 					$v = $v >> 1;
 				}
 			}
